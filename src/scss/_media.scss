@@ -1,0 +1,484 @@
+@media  (min-width : 320px){
+    h1{
+        font-size: 48px;
+    }
+    .section-header{
+        text-align: center;
+        h2{
+            font-size: 38px;
+        }
+    }
+    .container{
+        padding: 0 15px;
+    }
+    // nav
+    .nav{
+        display: none;
+    }// end nav
+
+    // popup
+    .form-send{
+        @include size(100%, 100%);
+        background: #fff;
+        form{
+            @include size(100%, 100%);
+        }
+
+    }
+    // end popup
+
+    // main
+    .main{ 
+        &-header{
+            justify-content: space-between;
+            .call{
+                .phone-number{
+                    margin-right: 10px;
+                }
+            }
+        }
+        &-footer{
+            .address{
+                margin-top: 20px;
+            }
+            &_logo{
+                @include position(absolute, $right: 5px, $bottom: -3px);
+            }
+        }
+    } 
+    .caption-content {
+        margin-left: 24px;
+    }
+    // end main
+    
+    // gallery
+    .gallery{
+        .club,
+        .residence{
+            .slide{
+                width: 100%;
+            }
+        }
+        .choice{
+            &-house{
+                justify-content: center;
+                &_club{
+                    padding: 0 5px;
+                }
+                &_residence{
+                    padding: 0 5px;
+                }
+            }
+            .controls{
+                justify-content: center;
+            }
+        }
+        &-small{
+            display: none;
+        }
+        
+    }
+    // end gallery 
+
+    // layout
+    .layout{
+        &-content{
+            height: 900px;
+            &_nav{
+                width: 100%;
+            }
+        }
+        &-rooms{
+            width: 25%;
+        }
+        &-metуr{
+            &.active{
+                display: none;
+            }
+        }
+        .controls{
+            width: 100%;
+            @include position(absolute, $bottom: 40px, $left: 0);
+            justify-content: space-around;
+            .indicator{
+                div{
+                    margin: 0 5px;
+                }
+            }
+        }
+        .slide{
+            &-description{
+                &_call{
+                    margin: 34px 0;
+                }
+            }
+        }
+        .partDocumentPage{
+            p{
+                width: 100%;
+                margin: 5px 0;
+                text-align: center;
+            }
+        }
+
+    } // end layout
+    // document
+    .document{
+        .container{
+            margin: 0 auto;
+        }
+        .slide{
+            margin-top: 20px;
+            .row{
+                .col{
+                    margin: 0 auto;
+                    &:nth-child(2),
+                    &:last-child{
+                        display: none;
+                    }
+                }
+            }
+        }
+        .controls{
+            margin-top: 20px;
+        }
+    } // end document
+
+    // office
+    .office{
+        padding: 50px 0;
+        &-map{
+            display: none;
+        }
+        &-address{
+            margin: 30px 0;
+        }
+    }
+    // end office
+    // footer
+    .footer{
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 10px;
+        & > *{
+            margin: 10px 0;
+        }
+    } //footer
+
+
+
+}
+@media (min-width: 576px) {
+    // document
+    .document .slide .row .col:nth-child(2), 
+    .document .slide .row .col:last-child {
+        display: block;
+    } // document
+}
+@media (min-width: 585px) {
+    .layout{
+        &-content{
+            height: 529px;
+        }
+        .controls{
+            left: auto;
+            right: 50px;
+            justify-content: flex-end;
+        }
+        .partDocumentPage{
+            margin-top: 350px;
+        }
+    }
+
+}
+@media (min-width: 590px) {
+    .layout{
+        .partDocumentPage{
+            margin-top: 153px;
+        }
+    }
+    .document{
+        .slide{
+            top: -115px;
+        }
+        .controls{
+            margin-top: 100px;
+        }
+    }
+
+}
+@media (min-width: 768px) {
+    h1{
+        font-size: 68px;
+    }
+    .section-header{
+        h2{
+            font-size: 68px;
+        }
+    }
+    .container{
+        padding: 0 45px;
+    }
+    // nav
+    .nav{
+        display: flex;
+    }
+    // end nav
+    // main
+    .main{ 
+        &-header{
+            justify-content: normal;
+            .call{
+                margin-left: 121px;
+                .phone-number{
+                    margin-right: 49px;
+                }
+            }
+        }
+        &-footer{
+            .address{
+                margin-top: 76px;
+                display: flex;
+                align-items: center;
+            }
+            &_address{
+                margin-left: 56px;
+            }
+            &_logo{
+                @include position(absolute, $right: 5px, $bottom: -3px);
+            }
+            &_metro{
+                margin-left: 87px;
+            }
+        }
+        .controls{
+            margin-left: 44px;
+            justify-content: normal;
+        }
+    } 
+    .caption-content {
+        margin-left: 44px;
+    }
+
+    // layout
+    .layout{
+        .controls{
+            right: 15px;
+            .indicator{
+                div{
+                    margin: 0 15px;
+                }
+            }
+        }
+        .partDocumentPage{
+            margin-top: 233px;
+            p{
+                width: auto;
+                text-align: left;
+            }
+        }
+
+    } // end layout
+    // document
+    .document{
+        .container{
+            margin: 0 auto;
+        }
+        .slide{
+            // top: -115px;
+            .row{
+                .col{
+                    &:nth-child(2),
+                    &:last-child{
+                        display: flex;
+                    }
+                }
+            }
+        }
+    } // end document
+
+    // office
+    .office{
+        padding: 50px 0;
+        &-contact{
+            width: 100%;
+        }
+        &-map{
+            display: none;
+        }
+        &-address{
+            margin: 30px 0;
+        }
+    }
+    // end office
+    // footer
+    .footer{
+        justify-content: space-around;
+        flex-direction: inherit;
+        padding: 0 10px;
+        & > *{
+            margin: 10px 0;
+        }
+    } //footer
+}
+
+@media (min-width: 992px) {
+    .section-header{
+        text-align: left;
+    }
+    // popup
+    .form-send{
+        @include size(768px, 506px);
+        background: url(../img/form.png) right / 50% 100% no-repeat, linear-gradient(to left, #fff);
+        form{
+            @include size(50%, 100%);
+        }
+
+    }// end popup
+
+    // layout
+    .layout{
+        .container{
+            margin-left: 17%;
+        }
+        
+        &-content{
+            width: 800px;
+            
+        }
+        &-metуr{
+            &.active{
+                width: 465px;
+            }
+        }
+        .partDocumentPage{
+            .row{
+                justify-content: flex-start;
+                p{
+                    &:last-child{
+                        margin-left: 30px
+                    }
+                }
+            }
+        }
+    } // end layout
+
+    //document
+    .document{
+        .container{
+            margin-left: 17%;
+        }
+        .slide{
+            .row{
+                .col{
+                    margin: 0;
+                    &:nth-child(2){
+                        margin: 0 50px;
+                    }
+                }
+            }
+            
+        }
+        .controls{
+            justify-content: flex-start;
+        }
+    } // end document
+
+    // office
+    .office{
+        &-header{
+            .section-header{
+                width: 100%;
+            }
+        }
+        &-contact{
+            width: 100%;
+            padding-top: 50px;
+
+        }
+        &-map{
+            &-img{
+                margin-top: 20px;
+            }
+        }
+    } // end office
+    
+}
+@media (min-width: 1200px) {
+    // layout
+    .layout{
+        &-content{
+            width: 885px;
+            
+        }
+        &-metуr{
+            &.active{
+                width: 549px;
+            }
+        }
+    } // end layout
+
+    // gallery
+    .gallery{
+        .club,
+        .residence{
+            .slide{
+                height: calc(100vh - 59px);
+                width: 82%;
+            }
+        }
+        &-footer{
+            @include display(flex, space-between);
+        }
+        .choice{
+            @include size(43.3%, 103px);
+            &-house{
+                &_club{
+                    padding-right: 76px;
+                    width: calc(100% - 202px);
+                }
+                &_residence{
+                    width: 202px;
+                }
+            }
+            .controls{
+                justify-content: flex-end;
+                .prev{
+                margin-left: 37px;
+                }
+                .next{
+                    margin-right: 56.65px;
+                }
+            }
+        }
+        &-small{
+            display: flex;
+            width: 55%;
+        }
+    }
+
+    // office
+    .office{
+        &-header{
+            .section-header{
+                width: 210px;
+            }
+        }
+        &-contact{
+            width: calc(100% - 210px);
+            padding: 0;
+            padding-left: 75px;
+
+        }
+        &-map{
+            display: flex;
+            &-img{
+                margin: 0;
+            }
+        }
+    } // end office
+
+
+    //  footer
+    // end footer
+}

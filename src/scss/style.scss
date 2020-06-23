@@ -1,0 +1,828 @@
+@mixin font($font_name, $file_name, $weight, $style) {
+    @font-face {
+        font-family: $font_name;
+        font-display: swap;
+        src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+        font-weight: #{$weight};
+        font-style: #{$style};
+    }
+}
+
+@import "fonts";
+@import "libs";
+@import "vars";
+@import "mixin";
+@import "slider";
+
+*{
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: "Cormorant", sans-serif;
+}
+p{
+    font-weight: 800;
+    font-family: "HelveticaNeueCyr", sans-serif;
+}
+
+.container{
+    // padding: 0 45px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ellipse{
+    @include size($ellipsWidth, $ellipsHeight);
+    position: relative;
+    align-items: center;
+    border: 1px solid $secondMainColor;
+    border-radius: 50%;
+    font-size: 10px;
+
+    svg{
+        @include size(10px, 10px);
+        @include position(absolute, $top: 50%, $left: 50%);
+        transform: translate(-50%, -50%);
+        fill: $mainColor;
+    }
+}
+
+.section-header{
+    h2{
+        // font-size: 68px;
+        font-weight: 500;
+        color: #212224;
+    }
+}
+
+.do-something{
+    display: inline-block;
+    @include fontSize(10px, 26px);
+    margin-top: -8px;
+    color: #ddd;
+    border-bottom: 1px solid #A68E52;
+}
+
+.btn{
+    width: 182px;
+    height: 38px;
+    background: $mainColor;
+    border: none;
+    border-radius: 3px;
+    font-size: 10px;
+    line-height: 26px;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    color: #FDFBFB;
+}
+
+// nav
+.nav{
+    padding: 103px 0;
+    position: fixed;
+    left: 45px;
+    // @include position(fixed, $top: 100vh);
+    height: 100vh;
+    @include display(flex, space-around);
+    display: flex;
+    flex-direction: column;
+    z-index: 30;
+    &-link{
+        display: flex;
+        align-items: center;
+        transition: all .3s linear;
+        .ellipse{
+            @include display(flex, center);
+            align-items: center;  
+            border: none;          
+            .ellipse-inside_elipse{
+                @include display(flex, center);
+                align-items: center; 
+                div{
+                    @include size(3px, 3px);
+                    background: $mainColor;
+                    border-radius: 50%;
+                }
+            }
+            
+            transition: all .3s linear;
+        }
+        p{
+            display: none;
+            margin-left: 10px;
+            font-size: 10px;
+            line-height: 26px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: $secondMainColor;
+        }
+
+        &.active{
+            .ellipse{
+                background: rgba(#ddd, .3);
+                border: 0.5px solid rgba($mainColor, .3);          
+                .ellipse-inside_elipse{
+                    @include display(flex, center);
+                    align-items: center;
+                    @include size(20px, 20px);
+                    background: rgba(#ddd, .5);
+                    border: 0.5px solid rgba($mainColor, .5); 
+                    border-radius: 50%;
+                    div{
+                        @include size(6px, 6px);
+                        box-shadow: 0px 0px 10px rgba(166, 142, 82, .7);
+                    }
+                }
+            }
+            p{
+                display: block;
+            }
+        }
+    }
+    &-controls{
+
+        &_prev,
+        &_next{
+            margin: 28px 0;
+            @include size(30px, 30px);
+            @include display(flex, center);
+            align-items: center;
+            cursor: pointer;
+            svg{
+                @include size(7px, 15px);
+                fill: $secondMainColor;
+                stroke: $secondMainColor;
+                
+            }
+            transition: all .3s linear;
+            &:hover{
+                svg{
+                    fill: $mainColor;
+                    stroke: $mainColor;
+                }
+                
+            }
+        }
+    }
+} //nav
+
+// form
+    .popup{
+        position: fixed;
+        top: 0;
+        left: 0;
+        @include size(100%, 100vh);
+        @include display(none, center);
+        align-items: center;
+        background: rgba(#000, .8);
+        z-index: 100;
+        &.active{
+            display: flex;
+            animation: show .5s linear;
+        }
+        @keyframes show {
+            0%{
+                top: -100%;
+            }
+            100%{
+                top: 50%;
+            }
+            
+        }
+
+    }
+    .form-send{
+        display: flex;
+        z-index: 100;
+        &_border{
+            position: relative;
+            width: 100%;
+            margin: 20px;
+            border: 1px solid rgba($mainColor, .5);
+            .close-popup{
+                @include position(absolute, $top: 23px, $right: 24px);
+                .ellipse{
+                    @include display(flex, center);
+                    align-items: center;
+                    @include size(42px, 42px);
+                    background: rgba(#212224, .3);
+                    border: 0.5px solid rgba($mainColor, .3);
+                    &-inside_elipse{
+                        @include display(flex, center);
+                        align-items: center;
+                        @include size(28px, 28px);
+                        background: #FDFBFB;
+                        border: 0.5px solid $mainColor;
+                        border-radius: 50%;
+                        span{
+                            width: 15px;
+                            position: relative;
+                            &::before,
+                            &::after{
+                                content: "";
+                                display: block;
+                                position: absolute;
+                                height: 1px;
+                                @include size(15px, 1px);
+                                background: #000;
+                            }
+                            &::before{
+                                transform: rotate(45deg);
+                            }
+                            &::after{
+                                transform: rotate(-45deg);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        form{
+            padding: 53px 53px 53px 47px;
+            @include display(flex, space-between);
+            flex-direction: column;
+            input{
+                padding: 11px 10px;
+                width: 100%;
+                border: none;
+                border-bottom: 1px solid #ddd;
+                font-size: 14px;
+                line-height: 24px;
+                &::placeholder{
+                    color: $secondMainColor;
+                }
+            }
+        }
+    }
+// end form
+
+
+.main{
+    height: 100vh;
+    position: relative;
+    z-index: 35;
+    .container{
+        @include size(100%, calc(100vh - 22px));
+        position: relative;
+    }
+    &-header{
+        margin-top: 22px;
+        display: flex;
+        .call{
+            @include display(flex, center);
+            flex-wrap: wrap;
+            align-items: center;
+            .phone-number{
+                margin-left: 12px;
+                // margin-right: 49px;
+            }
+            &-number{
+                @include fontSize(14px, 26px);
+                color: $mainColor;
+            }
+            .language{
+                .ellipse{
+                    @include display(flex, center);
+                    align-items: center;
+                }
+                p{
+                    margin-left: 2px;
+                    font-size: 10px;
+                    color: #ddd;
+                    letter-spacing: 0.05em;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+    .logo{
+        svg{
+            @include size(59px, 69px);
+            &:last-child{
+                @include size(69px, 100px);
+
+            }
+        }
+
+    }
+    &-footer{
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        z-index: 25;
+        .container{
+            height: auto;
+        }
+        .address{
+            // margin-top: 76px;
+            margin-bottom: 23px;
+           
+        }
+        &_address{
+            // margin-left: 56px;
+            display: flex;
+            align-items: center;
+            svg{
+                @include size(9px, 12.3px);
+                fill: $mainColor;
+            }
+            p{
+                margin-left: 10.5px;
+                font-size: 10px;
+                line-height: 26px;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                color: #ddd;
+                opacity: .7;
+            }
+        }
+        &_metro{
+            display: flex;
+            align-items: center;
+            .ellipse{
+                margin-right: 10px;
+                @include size(15px, 15px);
+                @include display(flex, center);
+                align-items: center;
+                border-color: $mainColor;
+            }
+            p{
+                margin-top: 1px;
+                margin-left: 1px;
+                font-size: 10px;
+                line-height: 26px;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                color: $mainColor;
+                opacity: .7;
+                
+            }
+
+        }
+        &_logo{
+            // @include position(absolute, $right: 45px, $bottom: -3px);
+            svg{
+                @include size(66px, 46px);
+            }
+        }
+        
+    }
+}
+
+// gallery
+.gallery{
+    height: 100vh;
+    .row{
+        height: 100%;
+        background: url(../img/gallery/tree.png) left bottom no-repeat;
+
+    }
+    .club,
+    .residence
+    {
+        position: relative;
+        width: 100%;
+    }
+    .residence{
+        display: none;
+    }
+    &-footer{
+        width: 100%;
+        @include position(absolute, $bottom: 0, $left: 0);
+        z-index: 25;
+    }
+    .choice{
+        background: #FDFBFB;
+        box-shadow: 0px 5px 60px rgba(55, 55, 55, 0.2);
+        z-index: 25;
+        &-house{
+            display: flex;
+            justify-content: space-between;
+            height: 44px;
+            &_club{
+                @include display(flex, flex-end);
+                align-items: center;
+                background: #F1F1F1;
+
+            }
+            &_residence{
+                @include display(flex, center);
+                align-items: center; 
+                background: #F1F1F1;
+            }
+            &_club.active{
+                background: #FDFBFB;
+            }
+            &_residence.active{
+                background: #FDFBFB;
+            }
+        }
+        .controls{
+            height: 59px;
+            svg{
+                fill: $secondMainColor;
+            stroke: $secondMainColor;
+            }
+            
+            
+            
+        }
+        .indicator{
+            & div{
+                background: #ddd;
+            }
+            & div.active{
+                background: $mainColor;
+              }
+        }
+    }
+    &-small{
+        @include display(flex, flex-end);
+        align-items: flex-end;
+        &_img{
+            @include size(119px, 74px);
+            margin-left: 10px;
+            background-size: cover;
+            background-position: center;   
+            &.active{
+                @include size(166px, 103px);
+            }         
+        }
+       
+    }
+}
+// end gallery
+
+// layout
+.layout{
+    height: 1180px;
+    background: linear-gradient(180deg, rgba(22, 27, 33, 0) 81.93%, #161B21 99.94%), url(../img/layout/1.webp) center / cover no-repeat;
+    .section-header{
+        margin-top: 41px;
+        margin-bottom: 42px;
+    }
+    .container{
+        padding: 0;
+    }
+    &-content{
+        position: relative;
+        // height: 529px;
+        background: #fff;
+        box-shadow: 0px 8px 20px rgba(33, 34, 36, 0.1);
+        &_nav{
+            @include position(absolute, $left: 0, $top: 0);
+            height: 44px;
+            display: flex;
+            align-items: center;
+        }
+    }
+    &-rooms{
+        height: 100%;
+        // @include size(84px, 100%);
+        @include display(flex, center);
+        align-items: center;
+        background: #F1F1F1;
+        p{
+            font-size: 10px;
+            font-weight: bold;
+            line-height: 26px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #212224;
+            transition: all .5s linear;
+        }
+        &.active{
+            background: #fff;
+            p{
+                color: $mainColor;
+            }
+        }
+           
+    }
+        
+
+    &-metуr{
+        @include display(none, space-around);
+        display: none;
+        width: 0;
+        overflow: hidden;
+        &.active{
+            // display: flex;
+            animation: tab .5s linear;
+        }
+        @keyframes tab {
+            0%{
+                width: 0;
+            }
+            100%{
+                width: 549px;
+            }
+        }
+        p{
+            color: rgba($secondMainColor, .7);
+            &.active{
+                color: #212224;
+            }
+        }
+    }
+    .slide{
+        @include display(flex, space-around);   
+        flex-wrap: wrap;     
+        height: auto;
+        top: 86px;
+        background: #fff;
+        &-description{
+            &_size{
+                padding: 0 30px;
+                height: 205px;
+                // @include size(426px, 205px);
+                box-shadow: 0px 8px 11px rgba(33, 34, 36, 0.05);
+            }
+            
+            h3{
+                font-size: 30px;
+                font-weight: 500;
+                line-height: 68px;
+                color: #212224;
+            }
+            &_flat{
+                @include display(flex, space-between);  
+                .description{
+                    height: 104px;
+                    p{
+                        font-size: 12px;
+                        line-height: 26px;
+                        color: $secondMainColor;
+                    }
+                    
+                }
+                .number{
+                    p{
+                        color: #212224;
+                    }
+                    
+                }
+                .vertical-lane{
+                    margin-top: 12px;
+                    height: 92px;
+                    border: 0.5px solid #DDDDDD;
+                }          
+            }
+            &_call{
+                display: flex;
+                // margin-top: 34px;
+                div:first-child{
+                    width: 220px;
+                    margin-right: 6px;
+                }
+                p{
+                    font-size: 14px;
+                    line-height: 24px;
+                    color: $secondMainColor;
+                }
+                span{
+                    color: #000;
+                }
+                .do-something{
+                    margin-top: 16px;
+                    color: $mainColor;
+                }
+                
+            }
+        }
+    }
+    .controls{
+        margin: 0;
+        .prev{
+            margin-left: 34px;
+        }
+        svg{
+            fill: $secondMainColor;
+            stroke: $secondMainColor;
+        }
+    }
+    .indicator{
+        div{
+            background: #DDDDDD;
+            &.active{
+                background: $mainColor;
+            }
+        }
+    }
+    .partDocumentPage{
+        // margin-top: 233px;
+        .section-header{
+            margin-bottom: 20px;
+            h2{
+                color: #FDFBFB;
+            }
+        }
+        .row{
+            justify-content: center;
+            font-size: 14px;
+            line-height: 24px;
+            color: #ddd;
+        }
+    }
+}
+// end layout
+
+// document
+.document{
+    background: #161B21;
+    height: 363px;
+    .container{
+        padding: 0;
+    }
+    
+    .slider{
+        position: relative;
+    }
+    .slide{
+        height: auto;
+        .col{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            @include size(189px, 260px);
+            padding: 34px 22px 20px 21px;
+            background: #161B21;
+            border: 0.5px solid $secondMainColor;
+            h4{
+                font-size: 18px;
+                line-height: 26px;
+                color: #ddd;
+            }
+        }
+    }
+    &-pdf{
+        display: flex;
+        align-items: center;
+        svg{
+            @include size(47px, 52px);
+        }
+        p{
+            margin-left: 55px;
+            font-size: 12px;
+            line-height: 26px;
+            color: $secondMainColor;
+        }
+    }
+    &-dowload{
+        @include display(flex, space-between);
+        align-items: center;
+        cursor: pointer;
+        p{
+            font-size: 12px;
+            line-height: 26px;
+            color: $secondMainColor;
+        }
+        svg{
+            @include size(9.5px, 13px);
+        }
+    }
+    hr{
+        width: 100%;
+        border: 0.5px solid $secondMainColor;
+    }
+    .controls{
+        // margin-top: 78px;
+        margin-left: 0;
+    }
+    .indicator{
+        div{
+            background: $secondMainColor;
+            &.active{
+                background: $mainColor;
+            }
+        }
+
+    }
+}
+// end document
+
+// office
+.office{
+    padding-top: 137px;
+    .container{
+        margin-left: 11.6%;
+    }
+    .do-something{
+        margin-top: 0;
+        font-size: 14px;
+        line-height: 24px;
+        color: $mainColor;
+    }
+    &-contact{
+        // padding-left: 75px;
+        // padding-right: 85px;
+        justify-content: space-between;
+        align-items: center;
+        // .do-something{
+
+        // }
+    }
+    &-address{
+        p{
+            font-size: 14px;
+            line-height: 24px;
+            color: $secondMainColor
+        }
+        h3{
+            font-size: 30px;
+            font-weight: 500;
+            line-height: 68px;
+            color: #212224;
+        }
+    }
+    &-work{
+        font-size: 10px;
+        line-height: 26px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: $secondMainColor;
+    }
+    &-map{
+        margin-top: 57px;
+        width: 100%;
+        justify-content: space-between;
+        .do-something{
+            height: 24px;
+            margin-left: 22.87px;
+
+        }
+        svg{
+            @include size(23px, 21px);
+        }
+    }
+}
+// end office
+
+// footer
+.footer{
+    // height: 88px;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+    background: #212224;
+    &-logo_site{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        svg{
+            @include size(88px, 119px);
+        }
+    }
+    &-address{
+        align-items: center;
+        p{
+            margin-left: 20px;
+            font-size: 14px;
+            line-height: 26px;
+            color: #B3AEAE
+        }
+        svg{
+            @include size(12px, 12px);
+        }
+    }
+    &-social{
+        svg{
+            @include size(16px, 16px);
+            margin: 0 8.5px;
+        }
+    }
+    &-language{
+        p{
+            margin: 0 7.5px;
+            font-size: 10px;
+            line-height: 26px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: $secondMainColor;
+            transition: all .3s linear;
+            &.active{
+                border-bottom: 1px solid #A68E52;
+                color: #B2AEAE;
+            }
+        }
+    }
+    &-logo_SmartOrange{
+        svg{
+            @include size(70px,28px);
+        }
+    }
+}
+// end footer
+
+@import "media";
+
+
+
